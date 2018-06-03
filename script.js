@@ -26,9 +26,10 @@ $('document').ready(function() {
     var totalMonths = (finalMonth + (years * 12)) - initialMonth + 1;
     console.log("Total Months: " + totalMonths);
     var month = initialMonth;
+    var year = initialDate.getFullYear();
     for (m = 0; m < totalMonths; m++){      
-      var monthStartsAt = new Date(initialDate.getFullYear(), month, 1);
-      var monthEndsAt = new Date(initialDate.getFullYear(), month, monthEnds[month]);
+      var monthStartsAt = new Date(year, month, 1);
+      var monthEndsAt = new Date(year, month, monthEnds[month]);
 
       var firstValidDayOfMonth;
       if (initialDate < monthStartsAt){
@@ -46,7 +47,7 @@ $('document').ready(function() {
       /*get the month and the year of the given date and add it to the header*/
       var monthLabel = monthNames[month];
       console.log('Month: ' + monthLabel);
-      var monthLabel = monthLabel + " - " + initialDate.getFullYear();
+      var monthLabel = monthLabel + " - " + year;
       html += '<tr><th class="text-center" colspan="7">' + monthLabel + '</th></tr></thead>';
 
       /*start filling invalid days at the beginning of the calendar*/
@@ -60,7 +61,7 @@ $('document').ready(function() {
         if (dayOfWeek == 0){
           html += '<tr>';
         }
-        html += '<td>&nbsp;</td>';
+        html += '<td class="invalid">&nbsp;</td>';
         dayOfWeek++;
         if(dayOfWeek == 7)
         {
@@ -87,11 +88,11 @@ $('document').ready(function() {
           html += '<tr>';
         }
         if(dayOfWeek == 0 || dayOfWeek == 6){
-          html += '<td>' + dayIndex + '</td>';
+          html += '<td class="weekend">' + dayIndex + '</td>';
         }
         else
         {
-          html += '<td>' + dayIndex + '</td>';
+          html += '<td class="valid">' + dayIndex + '</td>';
         }
         dayOfWeek++;
         dayIndex++;
@@ -131,6 +132,7 @@ $('document').ready(function() {
       month++;
       if (month > 11){
         month = 0;
+        year++;
       }
     }
   });

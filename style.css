@@ -1,0 +1,9 @@
+td.invalid {
+  background-color: lightgray;
+}
+td.weekend {
+  background-color: yellow;
+}
+td.valid {
+  background-color: greenyellow;
+}
