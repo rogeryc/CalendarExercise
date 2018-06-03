@@ -86,9 +86,37 @@ $('document').ready(function() {
         if (dayOfWeek == 0){
           html += '<tr>';
         }
-        html += '<td>' + dayIndex + '</td>';
+        if(dayOfWeek == 0 || dayOfWeek == 6){
+          html += '<td>' + dayIndex + '</td>';
+        }
+        else
+        {
+          html += '<td>' + dayIndex + '</td>';
+        }
         dayOfWeek++;
         dayIndex++;
+        if(dayOfWeek == 7)
+        {
+          html += '</tr>';
+          dayOfWeek = 0;
+        }
+      }
+
+      /* Fill invalid days at end of month */
+      var finalInvalidDays = 0;
+      if (finalDate < monthEndsAt){
+        finalInvalidDays = (monthEndsAt.getDate() - finalDate.getDate()) + (6 - monthEndsAt.getDay());
+      }
+      else{
+        finalInvalidDays = 6 - monthEndsAt.getDay();
+      }
+      console.log("Invalid final days of " + monthLabel + ": " + finalInvalidDays);
+      for (i = 0; i < finalInvalidDays; i++){
+        if (dayOfWeek == 0){
+          html += '<tr>';
+        }
+        html += '<td class="invalid">&nbsp;</td>';
+        dayOfWeek++;
         if(dayOfWeek == 7)
         {
           html += '</tr>';
@@ -103,7 +131,6 @@ $('document').ready(function() {
       month++;
       if (month > 11){
         month = 0;
-        year++;
       }
     }
   });
