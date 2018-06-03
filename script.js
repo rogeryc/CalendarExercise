@@ -28,6 +28,8 @@ $('document').ready(function() {
     var month = initialMonth;
     for (m = 0; m < totalMonths; m++){      
       var monthStartsAt = new Date(initialDate.getFullYear(), month, 1);
+      var monthEndsAt = new Date(initialDate.getFullYear(), month, monthEnds[month]);
+
       var firstValidDayOfMonth;
       if (initialDate < monthStartsAt){
         firstValidDayOfMonth = monthStartsAt;
@@ -54,7 +56,6 @@ $('document').ready(function() {
 
       var dayOfWeek = 0;
       html += "<tbody>";
-      console.log("Invalid days: " + initialInvalidDays);
       for (i = 0; i < initialInvalidDays; i++) {
         if (dayOfWeek == 0){
           html += '<tr>';
@@ -68,12 +69,42 @@ $('document').ready(function() {
         }
       }
 
+      /*start filling valid days */
+      console.log("Final date of " + monthLabel + ": " + monthEndsAt);
+      var validDaysOfMonth = 0;
+      if (finalDate > monthEndsAt){
+        validDaysOfMonth = monthEndsAt.getDate() - firstValidDayOfMonth.getDate() + 1;
+      }
+      else{
+        validDaysOfMonth = finalDate.getDate() - firstValidDayOfMonth.getDate() + 1;
+      }
+      console.log("Valid days of " + monthLabel + ": " + validDaysOfMonth);
+      
+      var dayIndex = initialDay;
+
+      for (i = 0; i < validDaysOfMonth; i++){
+        if (dayOfWeek == 0){
+          html += '<tr>';
+        }
+        html += '<td>' + dayIndex + '</td>';
+        dayOfWeek++;
+        dayIndex++;
+        if(dayOfWeek == 7)
+        {
+          html += '</tr>';
+          dayOfWeek = 0;
+        }
+      }
+
       html += '</tbody></table>';
-      console.log(html);
       $('#calendar').append(html);
 
       /*set next month value*/
       month++;
+      if (month > 11){
+        month = 0;
+        year++;
+      }
     }
   });
 });
