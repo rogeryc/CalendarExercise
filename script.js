@@ -14,17 +14,12 @@ $('document').ready(function() {
 
     var finalDate = new Date(initialDate);
     finalDate.setDate(finalDate.getDate() + (numberOfDays - 1));
-    console.log("Init date: " + initialDate);
-    console.log("Final date: " + finalDate);
 
     /*prepare indexes and totals*/
     var initialMonth = initialDate.getMonth();
     var finalMonth = finalDate.getMonth();
     var years = finalDate.getFullYear() - initialDate.getFullYear();
-    console.log("Initial Month: " + (initialMonth + 1));
-    console.log("Final Month: " + (finalMonth + 1));
     var totalMonths = (finalMonth + (years * 12)) - initialMonth + 1;
-    console.log("Total Months: " + totalMonths);
     var month = initialMonth;
     var year = initialDate.getFullYear();
     for (m = 0; m < totalMonths; m++){      
@@ -46,7 +41,6 @@ $('document').ready(function() {
 
       /*get the month and the year of the given date and add it to the header*/
       var monthLabel = monthNames[month];
-      console.log('Month: ' + monthLabel);
       var monthLabel = monthLabel + " - " + year;
       html += '<tr><th class="text-center" colspan="7">' + monthLabel + '</th></tr></thead>';
 
@@ -71,7 +65,6 @@ $('document').ready(function() {
       }
 
       /*start filling valid days */
-      console.log("Final date of " + monthLabel + ": " + monthEndsAt);
       var validDaysOfMonth = 0;
       if (finalDate > monthEndsAt){
         validDaysOfMonth = monthEndsAt.getDate() - firstValidDayOfMonth.getDate() + 1;
@@ -79,7 +72,6 @@ $('document').ready(function() {
       else{
         validDaysOfMonth = finalDate.getDate() - firstValidDayOfMonth.getDate() + 1;
       }
-      console.log("Valid days of " + monthLabel + ": " + validDaysOfMonth);
       
       var dayIndex = initialDay;
 
@@ -111,7 +103,6 @@ $('document').ready(function() {
       else{
         finalInvalidDays = 6 - monthEndsAt.getDay();
       }
-      console.log("Invalid final days of " + monthLabel + ": " + finalInvalidDays);
       for (i = 0; i < finalInvalidDays; i++){
         if (dayOfWeek == 0){
           html += '<tr>';
