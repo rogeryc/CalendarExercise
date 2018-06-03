@@ -6,5 +6,26 @@
     <title>JS Calendar</title>
   </head>
   <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <form id="calendarForm">  
+            <div class="form-group">
+              <label for="initialDate">Initial Date</label>
+              <input type="date" class="form-control" id="initialDate" placeholder="Enter initial date">
+            </div>
+            <div class="form-group">
+              <label for="numberOfDays">Number of Days</label>
+              <input type="number" class="form-control" id="numberOfDays" min="1">
+            </div>
+            <div class="form-group">
+                <label for="countryCode">Country Code</label>
+                <input type="text" class="form-control" id="countryCode" placeholder="Country code. Example: US">
+              </div>
+            <button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
